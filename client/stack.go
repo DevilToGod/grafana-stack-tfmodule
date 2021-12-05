@@ -1,10 +1,5 @@
 package gapi
 
-import (
-	"bytes"
-	"encoding/json"
-)
-
 type CreateStackRequest struct {
 	Name   string `json:"name"`
 	Slug   string `json:"slug"`
@@ -18,7 +13,7 @@ type CreateStackResponse struct {
 }
 
 // CreateAPIKey creates a new Grafana API key.
-func (c *Client) CreateStack(request CreateStackRequest) (CreateStackResponse, error) {
+/*func (c *Client) CreateStack(request CreateStackRequest) (CreateStackResponse, error) {
 	response := CreateStackResponse{}
 
 	data, err := json.Marshal(request)
@@ -28,4 +23,4 @@ func (c *Client) CreateStack(request CreateStackRequest) (CreateStackResponse, e
 
 	response, err = c.request("POST", "/api/instances", nil, bytes.NewBuffer(data), &response)
 	return response, err
-}
+}*/

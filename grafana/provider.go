@@ -3,12 +3,11 @@ package grafana
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
-	gapi "../client"
 )
 
 func init() {
@@ -37,7 +36,21 @@ func Provider(version string) func() *schema.Provider {
 					Required:    true,
 					Sensitive:   true,
 					DefaultFunc: schema.EnvDefaultFunc("GRAFANA_API_KEY", nil),
-					Description: "API token or basic auth username:password. May alternatively be set via the `GRAFANA_AUTH` environment variable.",
+					Description: "API token or basic auth username:password. May alternatively be set via the `GRAFANA_API_KEY` environment variable.",
+				},
+				"slug": {
+					Type:        schema.TypeString,
+					Required:    true,
+					Sensitive:   true,
+					DefaultFunc: schema.EnvDefaultFunc("GRAFANA_SLUG_NAME", nil),
+					Description: "Name of the URL SLUG. May alternatively be set via the `GRAFANA_SLUG_NAME` environment variable.",
+				},
+				"stackname": {
+					Type:        schema.TypeString,
+					Required:    true,
+					Sensitive:   true,
+					DefaultFunc: schema.EnvDefaultFunc("GRAFANA_STACK_NAME", nil),
+					Description: "Name of the stack. May alternatively be set via the `GRAFANA_STACK_NAME` environment variable.",
 				},
 			},
 		}
@@ -48,7 +61,7 @@ func Provider(version string) func() *schema.Provider {
 }
 
 type client struct {
-	gapi *gapi.Client
+	client *http.Client
 }
 
 func configure(version string, p *schema.Provider) func(context.Context, *schema.ResourceData) (interface{}, diag.Diagnostics) {

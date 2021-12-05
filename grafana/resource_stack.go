@@ -1,6 +1,6 @@
 package grafana
 
-import (
+/*import (
 	"context"
 
 	gapi "../client"
@@ -62,4 +62,4 @@ func CreateStack(ctx context.Context, d *schema.ResourceData, m interface{}) dia
 	println(response.URL)
 
 	return diag.Diagnostics{}
-}
+}*/
