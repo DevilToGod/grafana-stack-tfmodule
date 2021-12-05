@@ -1,4 +1,4 @@
-module github.com/grafana/grafana-api-golang-client
+module github.com/DevilToGod/grafana-stack-tfmodule
 
 go 1.14
 
